@@ -45,22 +45,22 @@ e.g. in `var client = container.Resolve<IClient>();` `client` is a Resolution Ro
 
     - __Property/Field Injection__: Injecting dependencies as properties and fields of the class. Because properties may
         be set not only in constructor but in any code at any time, it is harder to track and conclude about all class
-        dependencies. __Therefore, use the Property Injection as last-resort and strife for Constructor Injection as much as possible.__ 
+        dependencies. __Therefore, use the Property Injection as last-resort and strive for Constructor Injection as much as possible.__ 
 
     DryIoc supports both Constructor and Property/Field injection.
 
 * __Implementation Type__ is an actual type used for service creation, e.g. `SomeClient` and `SomeService`. 
     In DryIoc Implementation Type may be open-generic: `OtherService<>`.
 
-* __Service Type__ is usually an abstract or an interface type using for service location and dependency injection, e.g. `IClient` and `IService`.
-    Service Type should be assignable from Implementation Type. It is possible to have multiple Service Types for single Implementation Type as it may
+* __Service Type__ is usually an abstract or an interface type used for service location and dependency injection, e.g. `IClient` and `IService`.
+    Service Type should be assignable from Implementation Type. It is possible to have multiple Service Types for a single Implementation Type as it may
     implement multiple interfaces. In addition you can use Implementation Type itself as Service Type, so the one type is used for injection and creation. 
     In DryIoc Service Type may be open-generic: `IService<>`.
 
 
 ## Registration API
 
-DryIoc supports registration vid `Register..` methods with the provided mapping of service and implementation types:
+DryIoc supports registration via `Register..` methods with the provided mapping of service and implementation types:
 ```cs 
 
 using System;
@@ -84,7 +84,7 @@ class Register_service_with_implementation_types
 __Note:__ The order of registrations is not important __here__, 
 but may be important for other cases, like [Decorators](Decorators) or Collection [Wrappers](Wrappers).
 
-If you don't know the type in compile-time you can specify a run-time `Type` instead:
+If you don't know the type at compile-time you can specify a run-time `Type` instead:
 ```cs 
 class Register_service_with_implementation_runtime_types
 {
@@ -98,7 +98,7 @@ class Register_service_with_implementation_runtime_types
 }
 ```
 
-Container will check if the service type is assignable to the implementation type and will throw exception otherwise.
+The container will check if the service type is assignable to the implementation type and will throw exception otherwise.
 
 You can register open-generic as well:
 ```cs 
@@ -145,9 +145,9 @@ void Register(Factory factory, Type serviceType, object serviceKey, IfAlreadyReg
 ```
 
 You may call it directly by supplying the `factory` and the `serviceType`, 
-the other parameters are optional and maybe set to the default values (or the there is and overload where those parameters are optional).
+the other parameters are optional and maybe set to the default values (or there is an overload where those parameters are optional).
 
-The factory in DryIoc is th entity holding all the required info and behavior for the service creation.
+The factory in DryIoc is the entity holding all the required info and behavior for the service creation.
 The `Factory` is the abstract class with the following concrete implementations
 
 - `ReflectionFactory` - creates a service based on the supplied implementation type
